@@ -64,8 +64,8 @@ void removeNumber(int *& arrayPtr, int number, int &size){
         }
         
     tmp[size] = number;
-    delete [] arrayPtr;
     arrayPtr = tmp;
+    delete [] arrayPtr;
     size--;
     }
 }
