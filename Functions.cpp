@@ -56,16 +56,37 @@ void removeNumber(int *& arrayPtr, int number, int &size){
     // if "number" is not there -- no action
     // note, "size" changes
     
+//    int *tmp = new int[size - 1];
+//    
+//    if (check(arrayPtr, number, size) == -1) {
+//        for (int i = 0; i < size; ++i) {
+//            tmp[i] = arrayPtr[i];
+//        }
+//        
+//    tmp[size] = number;
+//    arrayPtr = tmp;
+//    delete [] arrayPtr;
+//    size--;
+//    }
+    
+    int index = check(arrayPtr, number, size);
+    
     int *tmp = new int[size - 1];
     
-    if (check(arrayPtr, number, size) == -1) {
-        for (int i = 0; i < size; ++i) {
+    if (check(arrayPtr, number, size) == -1)
+        return;
+    
+    for (int i = 0; i < size; ++i) {
+        if (i < index)
             tmp[i] = arrayPtr[i];
-        }
-        
-    tmp[size] = number;
-    arrayPtr = tmp;
-    delete [] arrayPtr;
-    size--;
+        if (i == index)
+            continue;
+        if (i > index)
+            tmp[i] = arrayPtr[i-1];
     }
+        
+
+    delete [] arrayPtr;
+    arrayPtr = tmp;
+    size--;
 }
